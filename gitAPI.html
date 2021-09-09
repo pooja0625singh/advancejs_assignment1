@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		GitApi
+	</title>
+
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<p>Search query for Github API</p>
+<input id="github"/>
+<button onClick="getapi()">Click Me</button>
+<script type="text/javascript" class="data">
+	async function getapi(url) {
+		const response = await fetch(url);
+		let data = await response.json();
+		data.items.forEach(item) => {
+			let getApiData = {
+				"name" : data.name,
+				"full_name" : data.full_name,
+				"private" : data.private,
+				"owner" : {
+					"login" : data.owner.login,
+					"name" : data.owner.url,
+					"followersCount" : data.owner.url,
+					"followingCount" : data.owner.url
+				}
+				"licenseName" : data.license.name,
+				"score" : data.score,
+				"numberOfBranch" : count(data.branches_url)
+			}
+		}
+	}
+	getapi("https://api.github.com/search/repositories?q=python")
+</script>
+</body>
+</html>
